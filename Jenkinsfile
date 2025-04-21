@@ -49,6 +49,7 @@ mvn versions:commit'''
         }
 
         stage('docker b&p') {
+          agent any
           steps {
             script {
               docker.withRegistry('https://index.docker.io/v1/', 'dockerlogin') {
