@@ -53,7 +53,8 @@ mvn versions:commit'''
           steps {
             script {
               docker.withRegistry('https://index.docker.io/v1/', 'dockerlogin') {
-                def dockerImage = docker.build("gramirezc/sysfoo:123", "./")
+                def commitHash = env.GIT_COMMIT.take(7)
+                def dockerImage = docker.build("gramirezc/sysfoo:${commitHash}", "./")
                 dockerImage.push()
                 dockerImage.push("latest")
                 dockerImage.push("dev")
